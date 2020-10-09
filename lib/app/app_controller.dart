@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -8,10 +9,17 @@ class AppController = _AppControllerBase with _$AppController;
 
 abstract class _AppControllerBase with Store {
   @observable
-  int value = 0;
+  ThemeData themeType = ThemeData.light();
+
+  @computed
+  bool get isDark => themeType.brightness == Brightness.dark;
 
   @action
-  void increment() {
-    value++;
+  void changeTheme() {
+    if (isDark) {
+      themeType = ThemeData.light();
+    } else {
+      themeType = ThemeData.dark();
+    }
   }
 }
