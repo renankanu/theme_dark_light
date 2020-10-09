@@ -11,14 +11,20 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        navigatorKey: Modular.navigatorKey,
-        title: 'Flutter Slidy',
-        theme: controller.themeType,
-        initialRoute: '/',
-        onGenerateRoute: Modular.generateRoute,
-      );
+      if (controller.themeType != null) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          navigatorKey: Modular.navigatorKey,
+          title: 'Flutter Slidy',
+          theme: controller.themeType,
+          initialRoute: '/',
+          onGenerateRoute: Modular.generateRoute,
+        );
+      } else {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      }
     });
   }
 }
